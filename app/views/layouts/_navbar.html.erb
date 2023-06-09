@@ -7,8 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to "Home", root_path, class: 'nav-link active' %>
+          <%= link_to "Home", root_path, class: 'nav-link' %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Blog", posts_path, class:'nav-link' %>
         <li class="nav-item">
           <%= link_to "About", about_path, class: 'nav-link' %>
         </li>
@@ -18,7 +20,8 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu dropdown-menu-lg-end">
+            <li><%= link_to "New Post", new_post_path, class: 'dropdown-item' %></li>
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
