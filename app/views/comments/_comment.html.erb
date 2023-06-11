@@ -12,8 +12,8 @@ style="border: 1px solid black; padding: 1em; margin: 1em;">
       data: {
         controller: "comments",
         action: "comments#toggleForm",
-        comment_form_param: "edit-form-#{comment.id}",
-        comment_body_param: "comment-body-#{comment.id}",
+        comments_form_param: "edit-form-#{comment.id}",
+        comments_body_param: "comment-body-#{comment.id}",
       } %>
       <%= button_to "Delete", [post, comment], class:"btn btn-danger", method: :delete %>
     </div>
@@ -21,6 +21,7 @@ style="border: 1px solid black; padding: 1em; margin: 1em;">
       <%= render 'comments/form', post: @post, 
       comment: comment,
       submit_label: "Update" %>
+    </div>
   <% end %>
   <hr />
   <div id="comment-body-<%= comment.id %>">
