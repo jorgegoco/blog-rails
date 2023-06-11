@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
 
   # GET /posts or /posts.json
@@ -9,7 +9,15 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    @post.update(views: @post.views + 1)
+    @post = Post.find(params[:id])
+
+    unless current_user.nil? || current_user == @post.user || session[:viewed_post_ids]&.include?(@post.id)
+      @post.increment!(:views)
+      session[:viewed_post_ids] ||= []
+      session[:viewed_post_ids] << @post.id
+    end
+
+    @comments = @post.comments.order(created_at: :desc)
   end
 
   # GET /posts/new
@@ -64,6 +72,9 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
+    return if current_user == @post.user
+
+    redirect_to post_path(@post), alert: 'You are not authorized to perform this action.'
   end
 
   # Only allow a list of trusted parameters through.
