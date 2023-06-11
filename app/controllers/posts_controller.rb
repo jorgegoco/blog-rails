@@ -10,7 +10,16 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @post.update(views: @post.views + 1)
+
+    unless current_user.nil? || current_user == @post.user
+      viewed_post_ids = viewed_post_ids || []
+      unless session[:viewed_post_ids]&.include?(@post.id)
+        @post.increment!(:views)
+        session[:viewed_post_ids] ||= []
+        session[:viewed_post_ids] << @post.id
+      end
+    end
+
     @comments = @post.comments.order(created_at: :desc)
   end
 
