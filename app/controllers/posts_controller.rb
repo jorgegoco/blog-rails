@@ -11,13 +11,10 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
 
-    unless current_user.nil? || current_user == @post.user
-      viewed_post_ids = viewed_post_ids || []
-      unless session[:viewed_post_ids]&.include?(@post.id)
-        @post.increment!(:views)
-        session[:viewed_post_ids] ||= []
-        session[:viewed_post_ids] << @post.id
-      end
+    unless current_user.nil? || current_user == @post.user || session[:viewed_post_ids]&.include?(@post.id)
+      @post.increment!(:views)
+      session[:viewed_post_ids] ||= []
+      session[:viewed_post_ids] << @post.id
     end
 
     @comments = @post.comments.order(created_at: :desc)
@@ -75,9 +72,9 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
-    unless current_user == @post.user
-      redirect_to post_path(@post), alert: "You are not authorized to perform this action."
-    end
+    return if current_user == @post.user
+
+    redirect_to post_path(@post), alert: 'You are not authorized to perform this action.'
   end
 
   # Only allow a list of trusted parameters through.
