@@ -75,4 +75,4 @@ end
 
 gem 'devise'
 
-gem "noticed", "~> 1.6"
+gem 'noticed', '~> 1.6'

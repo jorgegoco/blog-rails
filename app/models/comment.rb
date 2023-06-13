@@ -10,7 +10,9 @@ class Comment < ApplicationRecord
   private
 
   def notify_recipient
+    # rubocop:disable Style/HashSyntax
     CommentNotification.with(comment: self, post: post).deliver_later(post.user)
+    # rubocop:enable Style/HashSyntax
   end
 
   def cleanup_notifications
