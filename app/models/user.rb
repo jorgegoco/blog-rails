@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy # if user is deleted, delete all associated posts
   has_many :comments, dependent: :destroy # if user is deleted, delete all associated comments
+
+  has_many :notifications, as: :recipient, dependent: :destroy # if user is deleted, delete all associated notifications
 end
