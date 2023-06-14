@@ -6,4 +6,12 @@ class Post < ApplicationRecord
 
   has_noticed_notifications model_name: 'Notification'
   has_many :notifications, through: :user, dependent: :destroy
+
+  def self.ransackable_attributes(_ = nil)
+    %w[body title]
+  end
+
+  def self.ransackable_associations(_ = nil)
+    ['user']
+  end
 end
