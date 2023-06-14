@@ -7,4 +7,10 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy # if user is deleted, delete all associated comments
 
   has_many :notifications, as: :recipient, dependent: :destroy # if user is deleted, delete all associated notifications
+
+  private
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["email", "name"]
+    end
 end
