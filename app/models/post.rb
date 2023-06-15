@@ -10,12 +10,4 @@ class Post < ApplicationRecord
 
   has_noticed_notifications model_name: 'Notification'
   has_many :notifications, through: :user
-
-  def self.ransackable_attributes(_ = nil)
-    ['title']
-  end
-
-  def self.ransackable_associations(_ = nil)
-    ['user']
-  end
 end

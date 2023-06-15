@@ -77,4 +77,4 @@ gem 'devise'
 
 gem 'noticed', '~> 1.6'
 
-gem 'ransack', '~> 4.0'
+gem 'ransack', '< 3.2.1'
