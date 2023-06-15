@@ -74,7 +74,7 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
-    return if current_user == @post.user
+    return if current_user == @post.user || current_user.role == 'admin'
 
     redirect_to post_path(@post), alert: 'You are not authorized to perform this action.'
   end

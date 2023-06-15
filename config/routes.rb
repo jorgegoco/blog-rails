@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'admin/comments'
     get 'admin/users'
     get 'admin/show_post/:id', to: 'admin#show_post', as: 'admin_post'
+    get 'admin/show_commnt/:id', to: 'admin#show_comment', as: 'admin_comment'
     get 'search', to: 'search#index'
     get 'users/profile'
   end
