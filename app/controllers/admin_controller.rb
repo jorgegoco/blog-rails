@@ -11,6 +11,7 @@ class AdminController < ApplicationController
   end
 
   def users
+    @users = User.all.order(created_at: :desc)
   end
 
   def show_post
