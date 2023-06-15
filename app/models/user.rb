@@ -8,14 +8,14 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient, dependent: :destroy # if user is deleted, delete all associated notifications
 
-  enum role: [:user, :admin]
+  enum role: %i[user admin]
   after_initialize :set_default_role, if: :new_record?
 
   def self.ransackable_attributes(_ = nil)
     %w[email name]
   end
 
-  private 
+  private
 
   def set_default_role
     self.role ||= :user
