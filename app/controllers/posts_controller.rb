@@ -9,7 +9,11 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
+
+    if params[:id] != @post.slug
+      return redirect_to post_path(@post), status: :moved_permanently
+    end
 
     unless current_user.nil? || current_user == @post.user || session[:viewed_post_ids]&.include?(@post.id)
       @post.increment!(:views)
@@ -73,7 +77,12 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
+
+    if params[:id] != @post.slug
+      return redirect_to post_path(@post), status: :moved_permanently
+    end
+    
     return if current_user == @post.user || current_user.role == 'admin'
 
     redirect_to post_path(@post), alert: 'You are not authorized to perform this action.'
