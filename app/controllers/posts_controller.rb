@@ -11,6 +11,11 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
 
+    # If an old id or a numeric id was used to find the record, then
+    # the request path will not match the post_path, and we should do
+    # a 301 redirect that uses the current friendly id.
+    redirect_to @post, status: :moved_permanently if request.path != post_path(@post)
+
     unless current_user.nil? || current_user == @post.user || session[:viewed_post_ids]&.include?(@post.id)
       @post.increment!(:views)
       session[:viewed_post_ids] ||= []
@@ -74,6 +79,7 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
+
     return if current_user == @post.user || current_user.role == 'admin'
 
     redirect_to post_path(@post), alert: 'You are not authorized to perform this action.'

@@ -78,3 +78,5 @@ gem 'devise'
 gem 'noticed', '~> 1.6'
 
 gem 'ransack', '< 3.2.1'
+
+gem 'friendly_id', '~> 5.5'
