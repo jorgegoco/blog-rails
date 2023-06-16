@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    @post = Post.friendly.find(params[:id])
+    @post = Post.find(params[:id])
 
      # If an old id or a numeric id was used to find the record, then
     # the request path will not match the post_path, and we should do
@@ -80,7 +80,7 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.friendly.find(params[:id])
+    @post = Post.find(params[:id])
 
     return if current_user == @post.user || current_user.role == 'admin'
 
