@@ -2,7 +2,7 @@ class AdminController < ApplicationController
   def index; end
 
   def posts
-    @posts = Post.all.includes(:user, :comments).order(created_at: :desc)
+    @posts = Post.all.includes(:user).order(created_at: :desc)
   end
 
   def comments
