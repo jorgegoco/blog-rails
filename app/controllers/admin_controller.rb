@@ -6,7 +6,7 @@ class AdminController < ApplicationController
   end
 
   def comments
-    @comments = Comment.all.includes(:user, :post).order(created_at: :desc)
+    @comments = Comment.all.includes(:user, { post: :user }, :rich_text_body).order(created_at: :desc)
   end
 
   def users
