@@ -2,11 +2,11 @@ class AdminController < ApplicationController
   def index; end
 
   def posts
-    @posts = Post.all.includes(:user, :comments).order(created_at: :desc)
+    @posts = Post.all.includes(:user).order(created_at: :desc)
   end
 
   def comments
-    @comments = Comment.all.includes(:user, :post).order(created_at: :desc)
+    @comments = Comment.all.includes(:user, { post: :user }, :rich_text_body).order(created_at: :desc)
   end
 
   def users
@@ -14,7 +14,7 @@ class AdminController < ApplicationController
   end
 
   def show_post
-    @post = Post.includes(:user, :comments).find(params[:id])
+    @post = Post.includes(:user, comments: { user: {}, rich_text_body: {} }).find(params[:id])
   end
 
   def show_comment

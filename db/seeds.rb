@@ -7,22 +7,35 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.create(email: "r@gmail.com", 
-  name: "rauru", 
-  password: "999999", 
-  password_confirmation: "999999",
-  role: User.roles[:admin])
+            name: "rauru", 
+            password: "999999", 
+            password_confirmation: "999999",
+            role: User.roles[:admin])
 User.create(email: "z@gmail.com", 
-  name: "zelda", 
-  password: "888888", 
-  password_confirmation: "888888")
+            name: "zelda", 
+            password: "888888", 
+            password_confirmation: "888888")
 
-10.times do |x|
-  post = Post.create(title: "Title #{x}", 
-    body: "Body #{x}", 
-    user_id: User.first.id)
-  5.times do |y|
-      Comment.create(body: "Comment #{y}",
-        user_id: User.second.id,
-        post_id: post.id)
-  end      
+posts = []
+comments = []            
+
+elapsed = Benchmark.measure do            
+  1000.times do |x|
+    puts "Creating post #{x}"
+    post = Post.new(title: "Title #{x}", 
+                       body: "Body #{x}", 
+                       user_id: User.first.id)
+    posts.push(post)
+    10.times do |y|
+      puts "Creating comment #{y} for post #{x}"
+      comment = post.comments.new(body: "Comment #{y}",
+                           user_id: User.second.id)
+      comments.push(comment)
+    end      
+  end
 end
+
+Post.import posts
+Comment.import comments
+
+puts "Elapsed time is #{elapsed.real} seconds"
