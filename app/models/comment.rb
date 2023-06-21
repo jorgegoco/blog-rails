@@ -10,6 +10,8 @@ class Comment < ApplicationRecord
   private
 
   def notify_recipient
+    return if post.user == user
+
     # rubocop:disable Style/HashSyntax
     CommentNotification.with(comment: self, post: post).deliver_later(post.user)
     # rubocop:enable Style/HashSyntax

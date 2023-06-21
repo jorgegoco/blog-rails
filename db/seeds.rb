@@ -14,28 +14,26 @@ User.create(email: "r@gmail.com",
 User.create(email: "z@gmail.com", 
             name: "zelda", 
             password: "888888", 
-            password_confirmation: "888888")
+            password_confirmation: "888888")           
 
-posts = []
-comments = []            
-
-elapsed = Benchmark.measure do            
+elapsed = Benchmark.measure do 
+  posts = []
+  rauru = User.first
+  zelda = User.second           
   1000.times do |x|
     puts "Creating post #{x}"
     post = Post.new(title: "Title #{x}", 
                        body: "Body #{x}", 
-                       user_id: User.first.id)
-    posts.push(post)
+                       user: rauru)
+
     10.times do |y|
       puts "Creating comment #{y} for post #{x}"
-      comment = post.comments.new(body: "Comment #{y}",
-                           user_id: User.second.id)
-      comments.push(comment)
+      post.comments.build(body: "Comment #{y}",
+                           user: zelda)
     end      
+    posts.push(post)
   end
+  Post.import(posts, recursive: true)
 end
-
-Post.import posts
-Comment.import comments
 
 puts "Elapsed time is #{elapsed.real} seconds"
