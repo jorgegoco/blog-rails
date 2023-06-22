@@ -11,6 +11,10 @@ class User < ApplicationRecord
   enum role: %i[user admin]
   after_initialize :set_default_role, if: :new_record?
 
+  def full_name
+    "#{first_name.capitalize} #{last_name.capitalize}"
+  end
+
   def self.ransackable_attributes(_ = nil)
     %w[email name]
   end

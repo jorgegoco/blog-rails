@@ -1,40 +1,49 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+#
+# Examples:
+#
+#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
+#   Character.create(name: "Luke", movie: movies.first)
+
 puts 'Seeding development database...'
-rauru = User.first_or_create!(email: 'r@gmail.com',
+dean = User.create(email: 'r@gmail.com',
                              password: '999999',
                              password_confirmation: '999999',
                              first_name: 'Rauru',
-                             last_name: 'González',
+                             last_name: 'Pereiro',
                              role: User.roles[:admin])
 
-zelda = User.first_or_create!(email: 'z@gmail.com',
+john = User.create(email: 'z@gmail.com',
                              password: '888888',
                              password_confirmation: '888888',
                              first_name: 'Zelda',
-                             last_name: 'Conde')
-Address.first_or_create!(street: '123 Main St',
+                             last_name: 'DoPazo')
+Address.create(street: '123 Main St',
                          city: 'Anytown',
-                         state: 'OH',
+                         state: 'CA',
                          zip: '12345',
                          country: 'USA',
-                         user: rauru)
-Address.first_or_create(street: '321 Main St',
+                         user: dean)
+Address.create(street: '123 Main St',
                         city: 'Anytown',
                         state: 'OH',
                         zip: '12345',
                         country: 'USA',
-                        user: zelda)
+                        user: john)
 elapsed = Benchmark.measure do
   posts = []
+
   10.times do |x|
     puts "Creating post #{x}"
     post = Post.new(title: "Title #{x}",
                     body: "Body #{x} Words go here Idk",
-                    user: rauru)
+                    user: dean)
 
     5.times do |y|
       puts "Creating comment #{y} for post #{x}"
       post.comments.build(body: "Comment #{y}",
-                          user: zelda)
+                          user: john)
     end
     posts.push(post)
   end

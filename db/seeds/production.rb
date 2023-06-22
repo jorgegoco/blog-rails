@@ -1,1 +1,1 @@
-puts 'Seeding production database...'
+puts 'Seeding production database...' if Rails.env.production?

@@ -17,9 +17,9 @@
         <tr>
           <th scope="row"><%= comment.id %></th>
           <td><%= link_to truncate(comment.body.to_plain_text, length: 15), admin_comment_path(comment) %></td>
-          <td><%= comment.user.name %></td>
+          <td><%= comment.user.full_name %></td>
           <td><%= comment.post.title %></td>
-          <td><%= comment.post.user.name %></td>
+          <td><%= comment.post.user.full_name %></td>
           <td><%= comment.updated_at.strftime("%B %d, %Y") %></td>
         </tr>
       <% end %>

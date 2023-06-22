@@ -1,1 +1,4 @@
-puts 'Seeding test database...'
+if Rails.env.test?
+  puts 'Seeding test database...'
+
+end
