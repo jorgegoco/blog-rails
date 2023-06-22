@@ -11,7 +11,7 @@ class AfterSignupController < ApplicationController
     when 'sign_up'
       skip_step if @user.persisted?
     when 'set_address'
-      @address = Address.new
+      @address = get_address
     when 'find_users'
       @users = User.all
     end
@@ -39,6 +39,14 @@ class AfterSignupController < ApplicationController
   end
 
   private
+
+  def get_address
+    if @user.address.nil?
+      Address.new
+    else
+      @user.address
+    end
+  end
 
   def finish_wizard_path
     root_path
