@@ -8,12 +8,13 @@ Rails.application.routes.draw do
     get 'admin/show_comment/:id', to: 'admin#show_comment', as: 'admin_comment'
   end
   get 'search', to: 'search#index'
-  get 'users/profile'
+  
   devise_for :users, controllers: { 
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
   get 'u/:id', to: 'users#profile', as: 'user'
+  resources :after_signup
   resources :posts do
     resources :comments
   end

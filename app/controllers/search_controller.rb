@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   def index
     @query = Post.ransack(params[:q])
-    @posts = @query.result(distinct: true)
+    @posts = @query.result.includes(:user, :rich_text_body)
   end
 end
