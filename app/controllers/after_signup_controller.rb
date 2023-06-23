@@ -40,6 +40,7 @@ class AfterSignupController < ApplicationController
 
   private
 
+  # rubocop:disable Naming/AccessorMethodName
   def get_address
     if @user.address.nil?
       Address.new
@@ -47,6 +48,7 @@ class AfterSignupController < ApplicationController
       @user.address
     end
   end
+  # rubocop:enable Naming/AccessorMethodName
 
   def finish_wizard_path
     root_path
