@@ -3,10 +3,7 @@
     <strong>Name:</strong>
     <%= category.name %>
   </p>
-
-  <p>
-    <strong>Display in nav:</strong>
-    <%= category.display_in_nav %>
-  </p>
-
+  <% category.posts.includes(:user, :rich_text_body).each do |post| %>
+    <%= render 'posts/post', post: post %>
+  <% end %>
 </div>
