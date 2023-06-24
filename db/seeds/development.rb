@@ -7,14 +7,14 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 puts 'Seeding development database...'
-dean = User.create(email: 'r@gmail.com',
+rauru = User.create(email: 'r@gmail.com',
                              password: '999999',
                              password_confirmation: '999999',
                              first_name: 'Rauru',
                              last_name: 'Pereiro',
                              role: User.roles[:admin])
 
-john = User.create(email: 'z@gmail.com',
+zelda = User.create(email: 'z@gmail.com',
                              password: '888888',
                              password_confirmation: '888888',
                              first_name: 'Zelda',
@@ -24,13 +24,18 @@ Address.create(street: '123 Main St',
                          state: 'CA',
                          zip: '12345',
                          country: 'USA',
-                         user: dean)
+                         user: rauru)
 Address.create(street: '123 Main St',
                         city: 'Anytown',
                         state: 'OH',
                         zip: '12345',
                         country: 'USA',
-                        user: john)
+                        user: zelda)
+category = Category.create(name:"Uncategorized", display_in_nav: true)
+Category.create(name:"Cars", display_in_nav: false)
+Category.create(name:"Bikes", display_in_nav: true)
+Category.create(name:"Boats", display_in_nav: true)                        
+
 elapsed = Benchmark.measure do
   posts = []
 
@@ -38,12 +43,13 @@ elapsed = Benchmark.measure do
     puts "Creating post #{x}"
     post = Post.new(title: "Title #{x}",
                     body: "Body #{x} Words go here Idk",
-                    user: dean)
+                    user: rauru,
+                    category: category)
 
     5.times do |y|
       puts "Creating comment #{y} for post #{x}"
       post.comments.build(body: "Comment #{y}",
-                          user: john)
+                          user: zelda)
     end
     posts.push(post)
   end
