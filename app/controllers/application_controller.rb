@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   # rubocop:disable Naming/PredicateName
-  def is_admin!
+  def is_admin?
     redirect_to root_path, alert: "You don't have permission to do that." unless current_user&.admin?
   end
   # rubocop:enable Naming/PredicateName
