@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient, dependent: :destroy # if user is deleted, delete all associated notifications
 
+  has_one_attached :avatar, dependent: :destroy # if user is deleted, delete all associated avatars
+
   has_one :address, dependent: :destroy, inverse_of: :user, autosave: true
 
   enum role: %i[user admin]
