@@ -70,6 +70,10 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    ahoy_matey (4.2.1)
+      activesupport (>= 5.2)
+      device_detector
+      safely_block (>= 0.2.1)
     ast (2.4.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
@@ -94,6 +98,7 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    device_detector (1.1.0)
     devise (4.9.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -236,6 +241,7 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
+    safely_block (0.4.0)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -288,6 +294,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import (~> 1.4)
+  ahoy_matey (~> 4.2)
   bootsnap
   bullet (~> 7.0)
   capybara
