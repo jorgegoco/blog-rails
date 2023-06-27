@@ -19,4 +19,9 @@ class Post < ApplicationRecord
   def should_generate_new_friendly_id?
     title_changed? || slug.blank?
   end
+
+  def views_by_day
+    daily_events = Ahoy::Event.where("cast(properties ->> 'post_id' as bigint) = ?", id)
+    daily_events.group_by_day(:time).count
+  end
 end

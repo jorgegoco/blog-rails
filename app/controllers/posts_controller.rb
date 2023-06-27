@@ -24,6 +24,8 @@ class PostsController < ApplicationController
 
     @comments = @post.comments.includes(:user, :rich_text_body).order(created_at: :desc)
 
+    ahoy.track 'Viewed Post', post_id: @post.id
+
     mark_notifications_as_read
   end
 
