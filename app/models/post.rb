@@ -24,4 +24,9 @@ class Post < ApplicationRecord
     daily_events = Ahoy::Event.where("cast(properties ->> 'post_id' as bigint) = ?", id)
     daily_events.group_by_day(:time).count
   end
+
+  def self.total_views_by_day
+    daily_events = Ahoy::Event.where(name: 'Viewed Post')
+    daily_events.group_by_day(:time).count
+  end
 end
