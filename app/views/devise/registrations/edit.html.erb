@@ -4,58 +4,57 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <%= f.label :email, class: "form-label" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <%= f.label :avatar, class: "form-label" %>
         <%= f.file_field :avatar, class: "form-control" %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <%= f.label :first_name, class: "form-label" %>
         <%= f.text_field :first_name, class: "form-control" %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <%= f.label :last_name, class: "form-label" %>
         <%= f.text_field :last_name, class: "form-control" %>
       </div>
 
       <%= fields_for :address, resource.address do |c| %>
-        <%= c.hidden_field :id %>
-        <div class="container card">
+        <%= c.hidden_field :id %>       
           <legend>Address</legend>
-          <div class="mb-3">
+          <div class="mb-3 col-md-6">
             <%= c.label :street, class: "form-label" %>
             <%= c.text_field :street, class: "form-control" %>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 col-md-6">
             <%= c.label :city, class: "form-label" %>
             <%= c.text_field :city, class: "form-control" %>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 col-md-6">
             <%= c.label :state, class: "form-label" %>
             <%= c.text_field :state, class: "form-control" %>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 col-md-6">
             <%= c.label :zip, class: "form-label" %>
             <%= c.text_field :zip, class: "form-control" %>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 col-md-6">
             <%= c.label :country, class: "form-label" %>
             <%= c.text_field :country, class: "form-control" %>
           </div>
-        </div>
+        
       <% end %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <%= f.label :password, class: "form-label" %> <i>(leave blank if you don't want to change it)</i>
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         <% if @minimum_password_length %>
@@ -63,12 +62,12 @@
         <% end %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <%= f.label :password_confirmation, class: "form-label" %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 col-md-6">
         <%= f.label :current_password, class: "form-label" %> <i>(we need your current password to confirm your changes)</i>
         <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
       </div>
