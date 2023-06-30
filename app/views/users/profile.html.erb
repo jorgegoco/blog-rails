@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container my-5">
   <div class="row">
     <div class="col-4">
       <%= image_tag(@user.avatar, style:"width:150px; height: 150px; border-radius:100%") if @user.avatar.attached? %>
@@ -19,7 +19,7 @@
       <% @posts.each do |post| %>
         <div class="card mt-3">
           <div class="card-body">
-            <h5 class="card-title"><%= link_to post.title, post %></h5>
+            <h5 class="card-title"><%= link_to post.title, post, class: "text-decoration-none" %></h5>
             <p class="card-text"><%= "#{time_ago_in_words(post.created_at)} ago" %></p>
             <p class="card-text"><%= post.body.to_plain_text.truncate_words(100) %></p>
           </div>

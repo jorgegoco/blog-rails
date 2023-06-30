@@ -1,12 +1,17 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Categories</h1>
-
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
+<div class="container my-4">
+  <h1 class="my-4">
+  <i class="bi bi-list"></i> Categories
+</h1>
+  <div id="categories">
+    <% @categories.each do |category| %>
+      <%= render category %>
+      <% if category.posts.includes(:posts).any? %>
+        <p>
+          <%= link_to "Show this category", category, class: "btn btn-primary mb-4" %>
+        </p>
+      <% end %>
+      <hr class="category-divider bg-secondary my-4">
+    <% end %>
+  </div>
 </div>

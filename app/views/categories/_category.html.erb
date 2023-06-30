@@ -1,9 +1,14 @@
 <div id="<%= dom_id category %>">
-  <h2>
+  <h2 class="mb-4">
     <% target = action_name.eql?("show") ? categories_path : category %>
-    <%= link_to category.name.capitalize, target %>
+    <%= link_to category.name.capitalize, target, class: "text-decoration-none" %>
   </h2>
-  <% category.posts.includes(:user, :rich_text_body).each do |post| %>
-    <%= render 'posts/post', post: post %>
+
+  <% if category.posts.includes(:posts).any? %>
+    <% category.posts.includes(:user, :rich_text_body).each do |post| %>
+      <%= render 'posts/post', post: post %>
+    <% end %>
+  <% else %>
+    <p class="text-muted">No posts yet.</p>
   <% end %>
 </div>

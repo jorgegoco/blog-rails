@@ -1,3 +1,20 @@
-<h1>Pages#about</h1>
-<p>Find me in app/views/pages/about.html.erb</p>
-<%= link_to "Home", root_path %>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag "jorge.jpg", class: "img-fluid rounded-circle" %>
+    </div>
+    <div class="col-md-9">
+      <h1>About Me</h1>
+      <p>Hello! My name is Jorge and I am a full-stack development student currently enrolled in Microverse, an innovative start-up teaching software development through pair programming and real-world projects.
+
+      I spent almost all my career in the manufacturing industry, so I’m familiar with being responsible, working with tight deadlines, and having social communication skills. I recently completed the MIT MicroMasters Program in Statistics and Data Science which provided me with the foundational knowledge essential to understanding the methods and tools used in data science, and hands-on training in data analysis and machine learning.
+
+      I am confident that my experience in the manufacturing industry combined with my education in data science will allow me to bring a unique perspective to your development team.
+
+      I’d love to sit down with you as soon as possible to discuss how I can help your team grow and thrive.
+      </p>
+      <p>On this website, you'll find information about my background, skills, projects, and more. Feel free to explore and get to know me better!</p>
+      <%= link_to "Home", root_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
