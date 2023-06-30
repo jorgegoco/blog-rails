@@ -82,7 +82,7 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
 
-    return if current_user == @post.user || current_user.role == 'admin'
+    return if current_user == @post.user || (current_user && current_user.role == 'admin')
 
     redirect_to post_path(@post), alert: 'You are not authorized to perform this action.'
   end
